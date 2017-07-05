@@ -23,7 +23,8 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var repliesCount: UILabel!
     @IBOutlet weak var favoritesCount: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
     
     
     
@@ -38,7 +39,19 @@ class TweetCell: UITableViewCell {
             dateLabel.text = tweet.createdAtString
             
             if tweet.user.imageURL != nil{
+                self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2
                 profilePicture.af_setImage(withURL: tweet.user.imageURL!)
+            }
+            
+            if tweet.favorited == true{
+                likeButton.isSelected = true
+            
+            }
+            
+            if tweet.retweeted == true{
+                retweetButton.isSelected = true
+            
+            
             }
             
             //Setting retweet and favorites counts
@@ -51,7 +64,7 @@ class TweetCell: UITableViewCell {
             if tweet.favoriteCount == 0{
                 favoritesCount.text = ""
             }else{
-                favoritesCount.text = "\(tweet.favoriteCount!)"
+                favoritesCount.text = "\(tweet.favoriteCount)"
             }
             
             
@@ -60,6 +73,101 @@ class TweetCell: UITableViewCell {
             }
             
         }
+    
+    
+    //Implementing the liking feature:
+    
+    @IBAction func didTapLike(_ sender: Any) {
+        
+        if likeButton.isSelected == false{
+            tweet.favorited = true
+            tweet.favoriteCount += 1
+            likeButton.isSelected = true
+            
+            
+            //call to favorite the tweet
+            APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully favorited the following Tweet: \n\(tweet.text)")
+                }
+            }
+            
+            
+        }else{
+            likeButton.isSelected = false
+            tweet.favorited = false
+            tweet.favoriteCount -= 1
+            
+            APIManager.shared.unfavorite(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully unfavorited the following Tweet: \n\(tweet.text)")
+                }
+            }
+    
+        }
+        
+        refreshData()
+    }
+    
+    
+    @IBAction func didTapRetweet(_ sender: Any) {
+        if likeButton.isSelected == false{
+            tweet.retweeted = true
+            tweet.retweetCount += 1
+            retweetButton.isSelected = true
+            
+            
+            //call to favorite the tweet
+            APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully favorited the following Tweet: \n\(tweet.text)")
+                }
+            }
+            
+            
+        }else{
+            retweetButton.isSelected = false
+            tweet.retweeted = false
+            tweet.retweetCount -= 1
+            
+            APIManager.shared.unretweet(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully unfavorited the following Tweet: \n\(tweet.text)")
+                }
+            }
+            
+        }
+        
+        refreshData()
+        
+    }
+    
+    
+    
+    
+    
+    func refreshData(){
+        if tweet.retweetCount == 0{
+            retweetCount.text = ""
+        }else{
+            retweetCount.text = "\(tweet.retweetCount)"
+        }
+        
+        if tweet.favoriteCount <= 0{
+            favoritesCount.text = ""
+        }else{
+            favoritesCount.text = "\(tweet.favoriteCount)"
+        }
+    }
+    
     
     
     override func awakeFromNib() {
