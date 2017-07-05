@@ -35,6 +35,10 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    
+    
+    
+    
     func didPullToRefresh(_ refreshControl: UIRefreshControl){
         fetchTimeline()
     }
