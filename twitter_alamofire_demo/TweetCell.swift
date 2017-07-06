@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-
+import DateToolsSwift
 
 class TweetCell: UITableViewCell {
     
@@ -36,7 +36,7 @@ class TweetCell: UITableViewCell {
             tweetTextLabel.text = tweet.text
             usernameLabel.text = tweet.user.name
             handleLabel.text = "@"+tweet.user.screenName
-            dateLabel.text = tweet.createdAtString
+            dateLabel.text = tweet.twitterDateString
             
             if tweet.user.imageURL != nil{
                 self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2
@@ -154,6 +154,9 @@ class TweetCell: UITableViewCell {
         
         
     }
+    
+    
+    
     
     
     

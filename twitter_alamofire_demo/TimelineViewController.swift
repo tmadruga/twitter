@@ -65,9 +65,11 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "newPostSegue"{
+            let vc = segue.destination as! newPostViewController
+            vc.delegate = self as newPostViewControllerDelegate
         
-        let vc = segue.destination as! newPostViewController
-        vc.delegate = self as newPostViewControllerDelegate
+        }
     }
     
     

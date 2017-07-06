@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import DateToolsSwift
 
 class Tweet {
     
@@ -19,6 +20,7 @@ class Tweet {
     var retweeted: Bool // Configure retweet button
     var user: User // Contains name, screenname, etc. of tweet author
     var createdAtString: String // Display date
+    var twitterDateString: String //Display date twtiter style
     
     // MARK: - Create initializer with dictionary
     init(dictionary: [String: Any]) {
@@ -38,6 +40,7 @@ class Tweet {
         formatter.dateFormat = "E MMM d HH:mm:ss Z y"
         // Convert String to Date
         let date = formatter.date(from: createdAtOriginalString)!
+        twitterDateString = date.shortTimeAgoSinceNow
         // Configure output format
         formatter.dateStyle = .short
         formatter.timeStyle = .none
