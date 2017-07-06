@@ -75,7 +75,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
         cell.tweet = tweets[indexPath.row]
-        tweet = cell.tweet
         
         return cell
     }
@@ -88,7 +87,10 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             
         }else{
             let vc = segue.destination as! DetailsViewController
-            vc.tweet = tweet
+        
+            if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+                vc.tweet = tweets[indexPath.row]
+            }
             
         }
         

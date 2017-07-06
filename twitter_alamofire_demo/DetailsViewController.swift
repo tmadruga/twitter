@@ -36,6 +36,7 @@ class DetailsViewController: UIViewController {
                 self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2
                 profilePicture.af_setImage(withURL: tweet.user.imageURL!)
             }
+    
             
             if tweet.retweetCount != 0 {
                 retweetCount.text = "\(tweet.retweetCount)"
@@ -64,11 +65,6 @@ class DetailsViewController: UIViewController {
             
             }
             
-            
-            
-            
-            
-        
         
         }
         
