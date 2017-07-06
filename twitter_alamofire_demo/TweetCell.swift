@@ -83,6 +83,7 @@ class TweetCell: UITableViewCell {
             tweet.favorited = true
             tweet.favoriteCount += 1
             likeButton.isSelected = true
+            refreshData()
             
             
             //call to favorite the tweet
@@ -99,6 +100,7 @@ class TweetCell: UITableViewCell {
             likeButton.isSelected = false
             tweet.favorited = false
             tweet.favoriteCount -= 1
+            refreshData()
             
             APIManager.shared.unfavorite(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
@@ -110,18 +112,19 @@ class TweetCell: UITableViewCell {
     
         }
         
-        refreshData()
+        
     }
     
     
     @IBAction func didTapRetweet(_ sender: Any) {
-        if likeButton.isSelected == false{
+        if retweetButton.isSelected == false{
             tweet.retweeted = true
             tweet.retweetCount += 1
             retweetButton.isSelected = true
+            refreshData()
             
             
-            //call to favorite the tweet
+            //call to retweet the tweet
             APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
                     print("Error favoriting tweet: \(error.localizedDescription)")
@@ -135,7 +138,10 @@ class TweetCell: UITableViewCell {
             retweetButton.isSelected = false
             tweet.retweeted = false
             tweet.retweetCount -= 1
+            refreshData()
             
+            
+            //call to unretweet
             APIManager.shared.unretweet(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
                     print("Error favoriting tweet: \(error.localizedDescription)")
@@ -146,7 +152,6 @@ class TweetCell: UITableViewCell {
             
         }
         
-        refreshData()
         
     }
     

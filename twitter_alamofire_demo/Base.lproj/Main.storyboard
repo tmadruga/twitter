@@ -244,15 +244,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What's happening?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jb1-U7-5JW">
-                                <rect key="frame" x="31" y="78" width="328" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibj-nD-vw8">
-                                <rect key="frame" x="341" y="28" width="26" height="24"/>
+                                <rect key="frame" x="32" y="43" width="26" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="CIU-eM-Ddz"/>
                                     <constraint firstAttribute="width" constant="26" id="TXo-h2-D1X"/>
@@ -262,18 +255,57 @@
                                     <action selector="dismissCompose:" destination="5Hp-2q-edL" eventType="touchUpInside" id="FGD-0q-56x"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsh-RM-2O3">
-                                <rect key="frame" x="172" y="148" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Post"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsh-RM-2O3">
+                                <rect key="frame" x="260" y="36" width="83" height="39"/>
+                                <color key="backgroundColor" red="0.30941608548164368" green="0.63572490215301514" blue="0.93337774276733398" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="QM2-7c-hIv"/>
+                                    <constraint firstAttribute="width" constant="83" id="cnx-zo-4UL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="  Tweet  ">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onPost:" destination="5Hp-2q-edL" eventType="touchUpInside" id="avq-4O-Qgn"/>
+                                </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m6R-ve-FUf" customClass="RSKPlaceholderTextView" customModule="RSKPlaceholderTextView">
+                                <rect key="frame" x="32" y="87" width="311" height="344"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="344" id="j2M-TC-CIf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="What's Happening"/>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ibj-nD-vw8" firstAttribute="top" secondItem="oBO-FQ-0cX" secondAttribute="bottom" constant="8" id="PXi-hC-Gel"/>
-                            <constraint firstItem="ibj-nD-vw8" firstAttribute="trailing" secondItem="iMt-XY-mNE" secondAttribute="trailingMargin" constant="8" id="t5r-my-ea7"/>
+                            <constraint firstItem="vsh-RM-2O3" firstAttribute="centerY" secondItem="ibj-nD-vw8" secondAttribute="centerY" id="2in-qM-V7I"/>
+                            <constraint firstItem="vsh-RM-2O3" firstAttribute="top" secondItem="oBO-FQ-0cX" secondAttribute="bottom" constant="16" id="7Yv-gT-Uaw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vsh-RM-2O3" secondAttribute="trailing" constant="16" id="8sI-KR-GAc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="m6R-ve-FUf" secondAttribute="trailing" constant="16" id="Up5-6E-jhX"/>
+                            <constraint firstItem="m6R-ve-FUf" firstAttribute="leading" secondItem="ibj-nD-vw8" secondAttribute="leading" id="V1Q-ah-LDa"/>
+                            <constraint firstItem="vsh-RM-2O3" firstAttribute="trailing" secondItem="m6R-ve-FUf" secondAttribute="trailing" id="oqn-2O-FCM"/>
+                            <constraint firstItem="m6R-ve-FUf" firstAttribute="top" secondItem="ibj-nD-vw8" secondAttribute="bottom" constant="20" id="pC6-fF-V5v"/>
+                            <constraint firstItem="m6R-ve-FUf" firstAttribute="leading" secondItem="iMt-XY-mNE" secondAttribute="leadingMargin" constant="16" id="tbk-1v-2WI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textBox" destination="m6R-ve-FUf" id="SvQ-Ae-GvR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6pP-I5-Mxi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

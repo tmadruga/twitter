@@ -7,11 +7,23 @@
 //
 
 import UIKit
+import RSKPlaceholderTextView
+
+
+protocol newPostViewControllerDelegate: class {
+    func did(post: Tweet)
+}
 
 class newPostViewController: UIViewController {
+    
+    @IBOutlet weak var textBox: UITextView!
+    weak var delegate: newPostViewControllerDelegate?
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
 
         // Do any additional setup after loading the view.
     }
@@ -26,14 +38,26 @@ class newPostViewController: UIViewController {
         
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func onPost(_ sender: Any) {
+        
+        APIManager.shared.composeTweet(with: textBox.text ) { (tweet, error) in
+            if let error = error {
+                print("Error composing Tweet: \(error.localizedDescription)")
+            } else if let tweet = tweet {
+                self.delegate?.did(post: tweet)
+                print("Compose Tweet Success!")
+            }
+            
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    
     }
-    */
+    
+    
+    
+    
+    
+    
 
 }

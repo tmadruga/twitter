@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import RSKPlaceholderTextView
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, newPostViewControllerDelegate{
     
     var tweets: [Tweet] = []
     var refreshControl: UIRefreshControl!
@@ -23,7 +24,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-    
+        
         
         //initialize Refresh Control
         refreshControl = UIRefreshControl()
@@ -31,12 +32,17 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.insertSubview(refreshControl, at: 0)
         //fetchdata
         fetchTimeline()
-
+        
         
     }
     
     
-    
+    func did(post: Tweet){
+        
+        self.tweets.insert(post, at:0)
+        self.tableView.reloadData()
+        
+    }
     
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl){
@@ -55,9 +61,15 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
         }
-    
+        
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let vc = segue.destination as! newPostViewController
+        vc.delegate = self as newPostViewControllerDelegate
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
