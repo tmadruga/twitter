@@ -10,12 +10,13 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import DateToolsSwift
+import TTTAttributedLabel
 
 class TweetCell: UITableViewCell {
     
     
     //Outlets
-    @IBOutlet weak var tweetTextLabel: UILabel!
+   
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var handleLabel: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -25,6 +26,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var tweetText: TTTAttributedLabel!
     
     
     
@@ -33,7 +35,9 @@ class TweetCell: UITableViewCell {
         didSet {
             
             //Setting tweet text, username, body, and date
-            tweetTextLabel.text = tweet.text
+//            tweetText.enabledTextCheckingTypes = NSTextCheckingTypes
+            tweetText.text = tweet.text
+            
             usernameLabel.text = tweet.user.name
             handleLabel.text = "@"+tweet.user.screenName
             dateLabel.text = tweet.twitterDateString
@@ -175,6 +179,8 @@ class TweetCell: UITableViewCell {
             favoritesCount.text = "\(tweet.favoriteCount)"
         }
     }
+    
+        
     
     
     

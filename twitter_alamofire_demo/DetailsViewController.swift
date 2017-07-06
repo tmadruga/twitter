@@ -14,8 +14,63 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     var tweet: Tweet!
 
+    @IBOutlet weak var tweetText: UILabel!
+    
+    @IBOutlet weak var handleLabel: UILabel!
+    
+    @IBOutlet weak var retweetCount: UILabel!
+    @IBOutlet weak var favoriteCount: UILabel!
+    @IBOutlet weak var retweetsLabel: UILabel!
+    @IBOutlet weak var likesLabel: UILabel!
+    
+    @IBOutlet weak var profilePicture: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let tweet = tweet{
+            usernameLabel.text = tweet.user.name
+            tweetText.text = tweet.text
+            handleLabel.text = "@"+tweet.user.screenName
+            
+            if tweet.user.imageURL != nil{
+                self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2
+                profilePicture.af_setImage(withURL: tweet.user.imageURL!)
+            }
+            
+            if tweet.retweetCount != 0 {
+                retweetCount.text = "\(tweet.retweetCount)"
+            }else {
+                
+                retweetCount.text = ""
+                retweetsLabel.text = ""
+            }
+            
+            if tweet.favoriteCount != 0{
+                favoriteCount.text = "\(tweet.favoriteCount)"
+            } else {
+                favoriteCount.text = ""
+                likesLabel.text = ""
+                
+            }
+            
+            
+            
+            if tweet.retweetCount == 1 {
+                retweetsLabel.text = "Retweet"
+            }
+            
+            if tweet.favoriteCount == 1 {
+                likesLabel.text = "Like"
+            
+            }
+            
+            
+            
+            
+            
+        
+        
+        }
         
         
         

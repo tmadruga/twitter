@@ -9,9 +9,10 @@
 import UIKit
 import RSKPlaceholderTextView
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, newPostViewControllerDelegate{
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, newPostViewControllerDelegate {
     
     var tweets: [Tweet] = []
+    var tweet: Tweet?
     var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView!
@@ -64,13 +65,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "newPostSegue"{
-            let vc = segue.destination as! newPostViewController
-            vc.delegate = self as newPostViewControllerDelegate
-        
-        }
-    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,8 +75,23 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
         cell.tweet = tweets[indexPath.row]
+        tweet = cell.tweet
         
         return cell
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "newPostSegue"{
+            let vc = segue.destination as! newPostViewController
+            vc.delegate = self as newPostViewControllerDelegate
+            
+        }else{
+            let vc = segue.destination as! DetailsViewController
+            vc.tweet = tweet
+            
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
