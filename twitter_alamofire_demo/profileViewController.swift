@@ -7,16 +7,34 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class profileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
+    var user = User.current
     var tweets: [Tweet] = []
     var tweet: Tweet?
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var bio: UILabel!
+    @IBOutlet weak var handle: UILabel!
+    @IBOutlet weak var followers: UILabel!
+    @IBOutlet weak var following: UILabel!
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        username.text = user?.name
+        handle.text = "@"+(user?.screenName)!
+        bio.text = user?.bio
+        followers.text = user?.followers
+        following.text = user?.following
+        
         
         
         //formatting tableView
@@ -24,10 +42,17 @@ class profileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+
         
+        
+        if user?.backgroundimageURL != nil{
+            backgroundImage.af_setImage(withURL: (user?.backgroundimageURL)!)
+        }
         
         //profile picture setup
-        
+        if user?.imageURL != nil{
+            profilePicture.af_setImage(withURL: (user?.imageURL!)!)
+        }
         profilePicture.layer.borderColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0).cgColor
         profilePicture.layer.borderWidth = 3
         self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2

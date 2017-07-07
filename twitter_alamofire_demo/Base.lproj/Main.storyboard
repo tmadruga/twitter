@@ -683,8 +683,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="fY1-qP-Ghb"/>
                     <connections>
+                        <outlet property="backgroundImage" destination="318-I4-u9p" id="whQ-uX-TwD"/>
+                        <outlet property="bio" destination="icS-UC-qwq" id="zna-HU-XYs"/>
+                        <outlet property="followers" destination="2SV-Yq-Bv0" id="n6u-av-czx"/>
+                        <outlet property="following" destination="08y-jR-4fR" id="kO8-90-XEY"/>
+                        <outlet property="handle" destination="zju-wB-jij" id="CJD-sx-SqG"/>
                         <outlet property="profilePicture" destination="5O2-xp-pW2" id="NHw-Ys-XI0"/>
                         <outlet property="tableView" destination="VhB-Dd-0pk" id="Gtb-Nh-DW1"/>
+                        <outlet property="username" destination="nVj-vI-fQq" id="EzJ-43-CXX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q6z-gC-yfp" userLabel="First Responder" sceneMemberID="firstResponder"/>

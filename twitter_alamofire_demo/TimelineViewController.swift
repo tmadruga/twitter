@@ -89,7 +89,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             let vc = segue.destination as! DetailsViewController
         
             if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
-                vc.tweet = tweets[indexPath.row]
+            vc.tweet = tweets[indexPath.row]
             }
             
         }

@@ -16,12 +16,22 @@ class User {
     var imageURL: URL?
     private static var _current: User?
     var dictionary: [String: Any]?
+    var bio: String?
+    var followers: String?
+    var following: String?
+    var backgroundimageURL: URL?
+    
     
     init(dictionary: [String: Any]) {
         name = dictionary["name"] as! String
         screenName = (dictionary["screen_name"] as? String)!
         image = dictionary["profile_image_url_https"] as! String
         imageURL = URL(string: (dictionary["profile_image_url_https"] as? String)!)!
+        bio = dictionary["description"] as? String
+        followers = "\(dictionary["followers_count"]!)"
+        following = "\(dictionary["friends_count"]!)"
+        let backgroundImage = dictionary["profile_background_image_url_https"] as? String
+        backgroundimageURL = URL(string: backgroundImage!)
         
         
         self.dictionary = dictionary
