@@ -12,7 +12,9 @@ import AlamofireImage
 import DateToolsSwift
 import TTTAttributedLabel
 
-class TweetCell: UITableViewCell {
+
+
+class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
     
     
     //Outlets
@@ -36,6 +38,13 @@ class TweetCell: UITableViewCell {
             
             //Setting tweet text, username, body, and date
 //            tweetText.enabledTextCheckingTypes = NSTextCheckingTypes
+            
+            tweetText.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
+            
+            tweetText.isUserInteractionEnabled = true
+            tweetText.delegate = self
+
+            
             tweetText.text = tweet.text
             
             usernameLabel.text = tweet.user.name
@@ -78,6 +87,13 @@ class TweetCell: UITableViewCell {
             
         }
     
+    
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        UIApplication.shared.open(url, options: [ : ]) { (Bool) in
+            print(url)
+        }
+    }
+
     
     //Implementing the liking feature:
     

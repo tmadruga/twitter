@@ -45,8 +45,8 @@ class profileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         
         
-        if user?.backgroundimageURL != nil{
-            backgroundImage.af_setImage(withURL: (user?.backgroundimageURL)!)
+        if user?.bannerImageURL != nil{
+            backgroundImage.af_setImage(withURL: (user?.bannerImageURL)!)
         }
         
         //profile picture setup

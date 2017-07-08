@@ -20,18 +20,26 @@ class User {
     var followers: String?
     var following: String?
     var backgroundimageURL: URL?
+    var bannerImageURL: URL?
     
     
     init(dictionary: [String: Any]) {
         name = dictionary["name"] as! String
         screenName = (dictionary["screen_name"] as? String)!
-        image = dictionary["profile_image_url_https"] as! String
-        imageURL = URL(string: (dictionary["profile_image_url_https"] as? String)!)!
+        var longimage = dictionary["profile_image_url_https"] as! String
+        let wordToRemove = "_normal"
+        if let range = longimage.range(of: wordToRemove) {
+            longimage.removeSubrange(range)
+            image = longimage
+        }
+        imageURL = URL(string: image!)
         bio = dictionary["description"] as? String
         followers = "\(dictionary["followers_count"]!)"
         following = "\(dictionary["friends_count"]!)"
         let backgroundImage = dictionary["profile_background_image_url_https"] as? String
         backgroundimageURL = URL(string: backgroundImage!)
+        let bannerImage = dictionary["profile_banner_url"] as? String
+        bannerImageURL = URL(string: bannerImage!)
         
         
         self.dictionary = dictionary
